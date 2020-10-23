@@ -1,0 +1,91 @@
+﻿@model TrabajoFinal_Unidad_I.Models.Ejercicio1
+@{
+    ViewBag.Title = "Ejercicio 1";
+}
+
+<h2 class="text-center mt-4 mb-5">@ViewBag.Title</h2>
+<div class="col-8 mx-auto mt-3">
+    @using (Html.BeginForm("Index", "Ejercicio1", FormMethod.Post, new { @class = "col-12" })) {
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            <div class="form-group row">
+                @Html.LabelFor(model => model.numero, "Valor a convertir: ", new { @class = "col-sm-6 col-form-label" })
+                <div class="col-sm-6">
+                    @Html.EditorFor(model => model.numero, new { htmlAttributes = new { @class = "form-control  col-6", @maxlength = 10 } })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-group row">
+                @Html.LabelFor(model => model.tipo, "Seleccione base: ", new { @class = "col-sm-6 col-form-label" })
+                <div class="col-sm-6">
+                    @Html.DropDownListFor(model => model.tipo, new List<SelectListItem> {
+                        new SelectListItem () {Text = "Binario",Value="0"}
+                    }, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div id="cant-dec" class="form-group">
+
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-success mx-0" value="Calcular" />
+        </div>
+        <div class="form-group">
+            @if (Model.lineas != 0) {             
+                <hr />
+                <h3 class="text-center">Resolución</h3>
+                for (int i = 0; i < Model.proceso.Count; i++) {
+                    if (Model.residuos[i].ToString().Equals("GO")) {
+                        <hr />
+                        <p class="text-center">@Model.proceso[i]</p>
+                    } else if (Model.resta.Count != 0) {                        
+                        <p class="text-center">@Model.proceso[i] <span class="border p-1 pl-2 pr-2 font-weight-bold">@Model.residuos[i]</span> @Model.resta[i]</p>
+                      
+                    } else {
+                        <p class="text-center">@Model.proceso[i] <span class="border p-1 pl-2 pr-2 font-weight-bold">@Model.residuos[i]</span></p>
+                    }
+                }
+            }
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(model => model.resultado, "El resultado es: ", new { @class = "col-sm-6 col-form-label" })
+            <div class="col-sm-6">
+                @Html.EditorFor(model => model.resultado, new { htmlAttributes = new { @class = "form-control  col-10", @disabled = "disabled" } })
+            </div>
+        </div>
+    }
+    <div class="alert-danger">
+        @Html.ValidationMessageFor(model => model.numero)
+        @Html.ValidationMessageFor(model => model.cantDec)
+    </div>
+</div>
+
+<script>
+    const cajaDec = document.getElementById("cant-dec");
+    const text = document.getElementById("numero");
+    if (text.value.includes('.')) {
+        cajaDec.innerHTML = `
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.cantDec, "N° de decimales a convertir: ", new { @class = "col-sm-6 col-form-label" })
+                <div class="col-sm-6">
+                    @Html.EditorFor(model => model.cantDec, new { htmlAttributes = new { @class = "form-control  col-6", @maxlength = 2 , min=0,max=10} })
+                </div>
+            `;       
+    } 
+
+    text.addEventListener("keyup", () => {
+        if (text.value.includes('.')) {
+            cajaDec.innerHTML = `
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.cantDec, "N° de decimales a convertir: ", new { @class = "col-sm-6 col-form-label" })
+                <div class="col-sm-6">
+                    @Html.EditorFor(model => model.cantDec, new { htmlAttributes = new { @class = "form-control  col-6", @maxlength = 2,min=0,max=10 } })
+                </div>
+            `;
+        } else {
+            cajaDec.innerHTML = "";
+        }
+    });
+</script>
+
