@@ -1,0 +1,14 @@
+﻿#progressContainer{
+    width:100%;
+    background-color:#ddd;
+}
+
+#progress{
+    width:1%;
+    height:30px;
+    background-color:#337ab7;
+}
+
+.caratulo{
+    font-size:21px;
+}

@@ -1,0 +1,57 @@
+﻿@using TrabajoFinal_Unidad_I;
+@using TrabajoFinal_Unidad_I.Models;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="~/src/css/styles.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        @Html.ActionLink("Trabajo Final", "Index", "Home", null, new { @class = "navbar-brand" })
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item @Html.IsActive("Ejercicio1","Index")">
+                    @Html.ActionLink("Ejercicio 1", "Index", "Ejercicio1", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item @Html.IsActive("Ejercicio2","Index") ">
+                    @Html.ActionLink("Ejercicio 2", "Index", "Ejercicio2", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item @Html.IsActive("Ejercicio3","Index") ">
+                    @Html.ActionLink("Ejercicio 3", "Index", "Ejercicio3", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item @Html.IsActive("Ejercicio4","Index") ">
+                    @Html.ActionLink("Ejercicio 4", "Index", "Ejercicio4", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item @Html.IsActive("Ejercicio5","Index") ">
+                    @Html.ActionLink("Ejercicio 5", "Index", "Ejercicio5", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item @Html.IsActive("Ejercicio6","Index") ">
+                    @Html.ActionLink("Ejercicio 6", "Index", "Ejercicio6", null, new { @class = "nav-link" })
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Roby Zuñiga Silva</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>
